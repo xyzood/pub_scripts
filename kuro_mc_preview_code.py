@@ -40,7 +40,7 @@ CODE_HTTP_SUCCESS = 200
 
 # 时间配置
 SHANGHAI_TZ = ZoneInfo("Asia/Shanghai")
-TWO_DAY_MS = 2 * 24 * 60 * 60 * 10000
+TWO_DAY_MS = 2 * 24 * 60 * 60 * 1000
 
 # 业务匹配关键词常量
 # 兑换码帖子必须同时包含的标题关键词
@@ -205,7 +205,7 @@ def get_kuro_user_posts(
         search_type: int = 1,
         type_val: int = 2,
         page_index: int = 1,
-        page_size: int = 100,
+        page_size: int = 10,
         token: str = ""
 ) -> Dict[str, Any]:
     url = "https://api.kurobbs.com/forum/getMinePost"
