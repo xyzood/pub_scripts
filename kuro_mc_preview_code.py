@@ -40,7 +40,7 @@ CODE_HTTP_SUCCESS = 200
 
 # 时间配置
 SHANGHAI_TZ = ZoneInfo("Asia/Shanghai")
-TWO_DAY_MS = 2 * 24 * 60 * 60 * 1000
+TWO_DAY_MS = 2 * 24 * 60 * 60 * 10000
 
 # 业务匹配关键词常量
 # 兑换码帖子必须同时包含的标题关键词
@@ -205,7 +205,7 @@ def get_kuro_user_posts(
         search_type: int = 1,
         type_val: int = 2,
         page_index: int = 1,
-        page_size: int = 10,
+        page_size: int = 100,
         token: str = ""
 ) -> Dict[str, Any]:
     url = "https://api.kurobbs.com/forum/getMinePost"
@@ -289,12 +289,12 @@ def build_preview_md(post: Dict[str, Any]) -> str:
     link = f"https://www.kurobbs.com/mc/post/{post_id}"
     md = [
         f"## 📢 鸣潮版本前瞻预告",
-        f"帖子标题：{title}",
-        f"创建时间：{create_time}",
-        f"帖子摘要：{content}",
-        f"帖子链接：{link}"
+        f"标题：{title}",
+        f"时间：{create_time}",
+        f"摘要：{content}",
+        f"链接：{link}"
     ]
-    return "\n".join(md)
+    return "\n\r".join(md)
 
 
 def build_code_md(post: Dict[str, Any], code_text: str) -> str:
@@ -309,17 +309,17 @@ def build_code_md(post: Dict[str, Any], code_text: str) -> str:
 
     md = [
         f"## 🎁 鸣潮版本前瞻兑换码更新",
-        f"帖子标题：{title}",
-        f"创建时间：{create_time}",
-        f"帖子链接：{link}",
-        f"帖子摘要：{content}"
+        f"标题：{title}",
+        f"时间：{create_time}",
+        f"链接：{link}",
+        f"摘要：{content}"
     ]
     if code_text:
-        md.append(f"\n兑换码原文：{code_text}")
+        md.append(f"\n\r兑换码：{code_text}")
     if codes:
-        code_block = "\n".join([f"- {c}" for c in codes])
-        md.append(f"\n### 可用兑换码列表\n{code_block}")
-    return "\n".join(md)
+        code_block = "\n\r".join([f"- {c}" for c in codes])
+        md.append(f"\n\r### 兑换码列表\n{code_block}")
+    return "\n\r".join(md)
 
 
 # ====================== 主扫描逻辑 ======================
